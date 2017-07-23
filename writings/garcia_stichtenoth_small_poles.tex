@@ -1,0 +1,126 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\usepackage{enumerate}
+
+  % \url{}; clickable references in pdf
+\usepackage{hyperref}
+
+  %commutative diagrams
+\usepackage{pictexwd,dcpic}
+
+  %margins
+\usepackage[margin=2.1cm]{geometry}
+
+  %custom symbols
+\newcommand{\mc}[1]{\ensuremath{\mathcal{#1}}}
+\newcommand{\mf}[1]{\ensuremath{\mathfrak{#1}}}
+\newcommand{\mb}[1]{\ensuremath{\mathbb{#1}}}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\xra}{\xrightarrow}
+\newcommand{\epi}{\twoheadrightarrow}
+\newcommand{\mono}{\hookrightarrow}
+\newcommand{\normal}{\vartriangleleft}
+\newcommand{\Ima}{\ensuremath{{\rm Im}}}
+\newcommand{\N}{\mb{N}}
+\newcommand{\Z}{\mb{Z}}
+\newcommand{\Q}{\mb{Q}}
+\newcommand{\R}{\mb{R}}
+\newcommand{\C}{\mb{C}}
+\newcommand{\F}{\mb{F}}
+\newcommand{\Or}{\mc{O}}
+\newcommand{\sgn}{\ensuremath{{\rm sgn}}}
+\newcommand{\End}{\ensuremath{{\rm End}}}
+\newcommand{\Gal}{\ensuremath{{\rm Gal}}}
+\newcommand{\Frob}{\ensuremath{{\rm Frob}}}
+\newcommand{\Tr}{\ensuremath{{\rm Tr}}}
+\newcommand{\Spec}{\ensuremath{{\rm Spec}}}
+\newcommand{\charac}{\ensuremath{{\rm char}}}
+\newcommand{\legendre}[2]{\left(\frac{#1}{#2}\right)}
+	
+	%theorems, lemmas, etc.
+\theoremstyle{plain}
+\newtheorem{mythm}{Theorem}[section]
+\newtheorem{mylemma}[mythm]{Lemma}
+\newtheorem*{mylemma_nonum}{Lemma}
+\newtheorem{myprop}[mythm]{Proposition}
+\newtheorem{mycor}[mythm]{Corollary}
+\theoremstyle{definition}
+\newtheorem{mydef}[mythm]{Definition}
+\newtheorem{myex}[mythm]{Example}
+\newtheorem{myrmk}[mythm]{Remark}
+
+%header and footer
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\setlength{\headheight}{14.5pt}
+\lhead{Matthew Weidner}
+\chead{}
+\rhead{Functions with Small Poles}
+\lfoot{}
+\cfoot{\thepage}
+\rfoot{}
+
+
+\begin{document}
+\title{Fast Construction of Functions of Many Weights with Small Pole Degrees in the Garcia-Stichtenoth Tower}
+\author{Matthew Weidner}
+\date{\today}
+\maketitle
+\vspace{-10pt}
+
+
+\section{Functions with Small Poles}
+TODO: notation as in SAK+
+
+Given $n \ge 2$ and $r \in [1, q^n - 1]$, $q \nmid r$, we wish to construct a function $f^{(n)}_r$ of weight $r$ in $F_n$, regular except for poles at $S^{(n)}_t$ ($1 \le t \le n-2$) of degree at most $q^{t-1} - 1$ and a pole at $S^{(n)}_0$ of degree at most $q^n - 1$.  It will follow that $\pi_0 x_0 f^{(n)}_r$ has weight $q^{n+1} + r$ and is regular except for poles in $S^{(n)}_{2 \rceil, n-2}$, and the sum of the maximum possible weighted pole orders at these places is at most $(n-1)q^n$.
+
+When manipulating elements, stating equalities, or referring to the structure of elements, we will always do so in the polynomial ring $\F_{q^2}[x_0, x_0^{-1}, \dots, x_n, x_n^{-1}]$.  In particular, this allows us to refer to unique decompositions into sums of monomials or into polynomials in terms of a certain variable.  Of course, all claims concerning places will only make sense in $F_n$.
+
+TODO: base case
+
+Write $r = e_1 q^{n-1} + e_2 q^{n-2} + \dots + e_n$.  Let $s = e_2 q^{n-2} + e_3 q^{n-3} + \dots + e_n$, and let $f^{(n-1)}_s$ be constructed recursively.  We inductively assume
+\begin{equation}\label{f_induct}
+f^{(n-1)}_s = \sum_{i=0}^{q-1} a_i \frac{x_1^{r_i}}{x_0^i},
+\end{equation}
+where each $a_j \in F_{n-1}$ is the result of shifting some $f^{(n-2)}_{t_j}$ up by 1, and each $r_j \in [1, q-1]$ except possibly $r_0$, which satisfies $r_0 = e_2$.
+
+Let $g$ be the result of shifting all indices in $f^{(n-1)}_s$ up by 1.  By our theory of shifting (TODO), $g$ is regular except for poles in $S^{(n)}_{2, n-2}$ of the form claimed for $f^{(n)}_r$ and poles at $S^{(n)}_{0, 1}$ of degree at most $q^{n-1} - 1$.
+
+Using equation (\ref{f_induct}) shifted up by 1, write
+\[
+g = \sum_{i=0}^{q-1} b_i \frac{x_2^{r_i}}{x_1^i}.
+\]
+Define
+\[
+h = \sum_{i=0}^{q-1} b_i \frac{u_2^{r_i}}{x_1^{-e_1 + i}}.
+\]
+Write $h$ as a polynomial in $x_0^{-1}$ as
+\[
+h = \sum_{j=0}^{q-1} c_j \frac{x_1^{s_j}}{x_0^j}
+\]
+where $s_j$ is the highest power of $x_1$ appearing in a monomial in the coefficient of $x_0^{j}$.  Since $b_i$ contains no $x_0$'s or $x_1$'s (because it comes from an element of $F_{n-2}$ shifted up by 1), we easily have $s_0 = e_1$.
+
+Now define $t_j$ by setting $t_0 = s_0 = 0$ and setting $t_j$, $j \in [1, q-1]$, to be the unique integer such that $t_j \equiv s_j \pmod{q-1}$, $t_j \in [1, q-1]$.  Define
+\[
+f^{(n)}_r = \sum_{j=0}^{q-1} c_j \frac{x_1^{t_j}}{x_0^j}.
+\]
+
+TODO
+
+TODO: mention regularity at easy places
+
+
+TODO: even or odd primes; $> 2$  
+
+
+
+
+\section{Fast Construction}
+
+
+
+\end{document}
