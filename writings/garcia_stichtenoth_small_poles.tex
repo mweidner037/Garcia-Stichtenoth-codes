@@ -80,42 +80,43 @@ Given $n \ge 2$ and $r \in [1, q^n - 1]$, $q \nmid r$, we wish to construct a fu
 
 When manipulating elements, stating equalities, or referring to the structure of elements, we will always do so in the polynomial ring $\F_{q^2}[x_0, x_0^{-1}, \dots, x_n, x_n^{-1}]$.  In particular, this allows us to refer to unique decompositions into sums of monomials or into polynomials in terms of a certain variable.  Of course, all claims concerning places will only make sense in $F_n$.
 
-TODO: base case
+TODO: shifting
 
-Write $r = e_1 q^{n-1} + e_2 q^{n-2} + \dots + e_n$.  Let $s = e_2 q^{n-2} + e_3 q^{n-3} + \dots + e_n$, and let $f^{(n-1)}_s$ be constructed recursively.  We inductively assume
-\begin{equation}\label{f_induct}
-f^{(n-1)}_s = \sum_{i=0}^{q-1} a_i \frac{x_1^{r_i}}{x_0^i},
-\end{equation}
-where each $a_j \in F_{n-1}$ is the result of shifting some $f^{(n-2)}_{t_j}$ up by 1, and each $r_j \in [1, q-1]$ except possibly $r_0$, which satisfies $r_0 = e_2$.
+\subsection{Inductive Assumptions}
+For a multiset $S \subset (q - 1) \times [1, n]$, we will let $\elem(S)$ denote the almost regular element we construct of weight equal to that of $\prod_{i \in S} i$.
 
-Let $g$ be the result of shifting all indices in $f^{(n-1)}_s$ up by 1.  By our theory of shifting (TODO), $g$ is regular except for poles in $S^{(n)}_{2, n-2}$ of the form claimed for $f^{(n)}_r$ and poles at $S^{(n)}_{0, 1}$ of degree at most $q^{n-1} - 1$.
+We set $\elem(\emptyset) = 1$.
 
-Using equation (\ref{f_induct}) shifted up by 1, write
+Before defining $\elem(S)$, we make several inductive assumptions, which we will take to hold for all lexicographically smaller sets $S$.  Here we let $n = \max\{S\}$.
+\begin{enumerate}[(A1)]
+  \item We can write
+  \[
+  \elem(S) = x_1^{S_1} \elem(S'[-1])[1] + \sum_a s_a \elem(T_a)[1] \frac{x_1^{c_a}{x_0^{d_a}}
+  \]
+  for some $T_a \subset (q- 1) \times [1, n-1]$, $s_a \in \F_q$, $c_a, d_a \in [1, q-1]$.  Here $S' = S \cap (q - 1) \times [2, n]$, and $S_1$ denotes the number of 1's in $S$.
+  
+  \item TODO
+  
+  \item TODO: above weight guarantees hold
+\end{enumerate}
+
+These assumptions hold vacuously in the base case $S = \emptyset$.
+
+
+
+\subsection{Case \texorpdfstring{$S_2 = 0$}{S2 = 0}}
+Let $S = S' \sqcup (S_1 \times 1)$ with $1 \notin S'$.  Let
 \[
-g = \sum_{i=0}^{q-1} b_i \frac{x_2^{r_i}}{x_1^i}.
+\elem(S'[-1]) = \elem(S'[-2])[1] + \sum_a s_a \elem(T_a)[1]\frac{x_1^{c_a}}{x_0^{d_a}}.
 \]
-Define
-\[
-h = \sum_{i=0}^{q-1} b_i \frac{u_2^{r_i}}{x_1^{-e_1 + i}}.
-\]
-Write $h$ as a polynomial in $x_0^{-1}$ as
-\[
-h = \sum_{j=0}^{q-1} c_j \frac{x_1^{s_j}}{x_0^j}
-\]
-where $s_j$ is the highest power of $x_1$ appearing in a monomial in the coefficient of $x_0^{j}$.  Since $b_i$ contains no $x_0$'s or $x_1$'s (because it comes from an element of $F_{n-2}$ shifted up by 1), we easily have $s_0 = e_1$.
-
-Now define $t_j$ by setting $t_0 = s_0 = 0$ and setting $t_j$, $j \in [1, q-1]$, to be the unique integer such that $t_j \equiv s_j \pmod{q-1}$, $t_j \in [1, q-1]$.  Define
-\[
-f^{(n)}_r = \sum_{j=0}^{q-1} c_j \frac{x_1^{t_j}}{x_0^j}.
-\]
-
-TODO
-
-TODO: mention regularity at easy places
-
-
-TODO: even or odd primes; $> 2$  
-
+Let $\rho: \Z \ra [1, q-1]$ be defined by $\rho(m) \equiv m \pmod{q-1}$.  Set
+\begin{align*}
+\elem(S)
+&= x_1^{S_1}\elem(S[-2])[2] + \sum_a b_a \elem(T_a)[2]\left(\frac{x_2^{c_a}}{x_1^{\rho(d_a - S_1)}} + \sum_{i=1}^{c_a} \binom{c_a}{i} x_2^{c_a - i}\frac{x_1^{\rho(2i - d_a + S_1)}}{x_0^i} \\
+&= x_1^{S_1}\elem(S'[-1])[1] + \sum_a b_a \sum_{i=1}^{c_a} \binom{c_a}{i} \elem(T_a)[2]x_2^{c_a - i}\frac{x_1^{\rho(2i - d_a + S_1)}}{x_0^i} \\
+x_1^{S_1}\elem(S'[-1])[1] + \sum_a b_a \sum_{i=1}^{c_a} \elem\left(T_a[2] \sqcup ((c_a - i) \times 2) \sqcup (\rho(2i - d_a + S_1) \times 1)\right) \frac{1}{x_0^i} + TODO \\
+&= 
+\end{align*}
 
 
 
