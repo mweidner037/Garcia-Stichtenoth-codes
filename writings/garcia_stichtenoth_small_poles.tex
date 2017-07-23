@@ -112,9 +112,14 @@ Let $S = S' \sqcup (S_1 \times 1)$ with $1 \notin S'$.  Let
 \]
 For each $a$, let
 \begin{align*}
-\elem(T_a[2] \sqcup (c_a \times 2) \sqcup ((q-1) -\rho(d_a - S_1)) \times 1))
+\elem(T_a[2] \sqcup (c_a \times 2) \sqcup ((S_1 - d_a) \times 1))
 &= \elem(T_a)[2]\left(\sum_{i=0}^{c_a} \binom{c_a}{i} x_2^{c_a - i}\frac{x_1^{\rho(2i - d_a + S_1)}}{x_0^i}\right) \\
-&+ \sum_b t_b \elem(U_b)[2]\left(\frac{x_2^{e_b}}{x_1^{f_b}} + \sum_{i=1}^{e_b} \binom{e_b}{i} x_2^{e_b - i}\frac{x_1^{\rho(2i - f_b)}}{x_0^i}\right).
+&+ \sum_b t_b \elem(U_b)[2]\left(\frac{x_2^{e_b}}{x_1^{f_b}} + \sum_{i=1}^{e_b} \binom{e_b}{i} x_2^{e_b - i}\frac{x_1^{\rho(2i - f_b)}}{x_0^i}\right),
+\end{align*}
+and also let
+\begin{align*}
+\elem(T_a[2] \sqcup (c_2 \times 2) \sqcup ((S_1 - d_a) \times 1))
+&= \elem(T_a[1])[1] x_1^{S_1 - d_a} + 
 \end{align*}
 Let $\rho: \Z \ra [1, q-1]$ be defined by $\rho(m) \equiv m \pmod{q-1}$.  Set
 \begin{align*}
