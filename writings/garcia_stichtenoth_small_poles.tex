@@ -40,6 +40,7 @@
 \newcommand{\Spec}{\ensuremath{{\rm Spec}}}
 \newcommand{\charac}{\ensuremath{{\rm char}}}
 \newcommand{\legendre}[2]{\left(\frac{#1}{#2}\right)}
+\newcommand{\elem}{\ensuremath{{\rm elem}}}
 	
 	%theorems, lemmas, etc.
 \theoremstyle{plain}
@@ -91,7 +92,7 @@ Before defining $\elem(S)$, we make several inductive assumptions, which we will
 \begin{enumerate}[(A1)]
   \item We can write
   \[
-  \elem(S) = x_1^{S_1} \elem(S'[-1])[1] + \sum_a s_a \elem(T_a)[1] \frac{x_1^{c_a}{x_0^{d_a}}
+  \elem(S) = x_1^{S_1} \elem(S'[-1])[1] + \sum_a s_a \elem(T_a)[1] \frac{x_1^{c_a}}{x_0^{d_a}}
   \]
   for some $T_a \subset (q- 1) \times [1, n-1]$, $s_a \in \F_q$, $c_a, d_a \in [1, q-1]$.  Here $S' = S \cap (q - 1) \times [2, n]$, and $S_1$ denotes the number of 1's in $S$.
   
@@ -109,15 +110,24 @@ Let $S = S' \sqcup (S_1 \times 1)$ with $1 \notin S'$.  Let
 \[
 \elem(S'[-1]) = \elem(S'[-2])[1] + \sum_a s_a \elem(T_a)[1]\frac{x_1^{c_a}}{x_0^{d_a}}.
 \]
+For each $a$, let
+\begin{align*}
+\elem(T_a[2] \sqcup (c_a \times 2) \sqcup ((q-1) -\rho(d_a - S_1)) \times 1))
+&= \elem(T_a)[2]\left(\sum_{i=0}^{c_a} \binom{c_a}{i} x_2^{c_a - i}\frac{x_1^{\rho(2i - d_a + S_1)}}{x_0^i}\right) \\
+&+ \sum_b t_b \elem(U_b)[2]\left(\frac{x_2^{e_b}}{x_1^{f_b}} + \sum_{i=1}^{e_b} \binom{e_b}{i} x_2^{e_b - i}\frac{x_1^{\rho(2i - f_b)}}{x_0^i}\right).
+\end{align*}
 Let $\rho: \Z \ra [1, q-1]$ be defined by $\rho(m) \equiv m \pmod{q-1}$.  Set
 \begin{align*}
 \elem(S)
-&= x_1^{S_1}\elem(S[-2])[2] + \sum_a b_a \elem(T_a)[2]\left(\frac{x_2^{c_a}}{x_1^{\rho(d_a - S_1)}} + \sum_{i=1}^{c_a} \binom{c_a}{i} x_2^{c_a - i}\frac{x_1^{\rho(2i - d_a + S_1)}}{x_0^i} \\
-&= x_1^{S_1}\elem(S'[-1])[1] + \sum_a b_a \sum_{i=1}^{c_a} \binom{c_a}{i} \elem(T_a)[2]x_2^{c_a - i}\frac{x_1^{\rho(2i - d_a + S_1)}}{x_0^i} \\
-x_1^{S_1}\elem(S'[-1])[1] + \sum_a b_a \sum_{i=1}^{c_a} \elem\left(T_a[2] \sqcup ((c_a - i) \times 2) \sqcup (\rho(2i - d_a + S_1) \times 1)\right) \frac{1}{x_0^i} + TODO \\
+&= x_1^{S_1}\elem(S[-2])[2] + \sum_a s_a \elem(T_a)[2]\left(\frac{x_2^{c_a}}{x_1^{\rho(d_a - S_1)}} + \sum_{i=1}^{c_a} \binom{c_a}{i} x_2^{c_a - i}\frac{x_1^{\rho(2i - d_a + S_1)}}{x_0^i}\right) \\
+&+ \sum_b t_b\elem(U_b)[2]\left(\frac{x_2^{e_b}}{x_1^{f_b}} + \sum_{i=1}^{e_b} \binom{e_b}{i} x_2^{e_b - i}\frac{x_1^{\rho(2i - f_b)}}{x_0^i}\right) \\
+&= x_1^{S_1}\elem(S'[-1])[1] + \sum_a s_a \elem(T_a[2] \sqcup (c_a \times 2) \sqcup ((S_1 - d_a) \times 1)) \\
+&+ \sum_a s_a \elem(T_a)[2]x_2^{c_a}x_1^{\rho(S_1 - d_a)} \\
 &= 
 \end{align*}
 
+
+TODO: make sure all $\elem$'s are inductive
 
 
 \section{Fast Construction}
